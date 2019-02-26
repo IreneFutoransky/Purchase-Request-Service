@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "prs", "prs\prs.csproj", "{0651ACAC-F073-48FB-B8B8-EB763C4C087B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "prs-server", "prs\prs-server.csproj", "{0651ACAC-F073-48FB-B8B8-EB763C4C087B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
