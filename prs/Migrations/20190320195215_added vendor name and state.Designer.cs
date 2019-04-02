@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using prs.Models;
 
 namespace prsserver.Migrations
 {
     [DbContext(typeof(PrsDbContext))]
-    partial class PrsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190320195215_added vendor name and state")]
+    partial class addedvendornameandstate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

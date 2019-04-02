@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using prs.Models;
 
 namespace prsserver.Migrations
 {
     [DbContext(typeof(PrsDbContext))]
-    partial class PrsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190226143155_added req lines controller")]
+    partial class addedreqlinescontroller
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,7 +107,7 @@ namespace prsserver.Migrations
 
                     b.HasIndex("RequestId");
 
-                    b.ToTable("RequestLines");
+                    b.ToTable("RequestsLine");
                 });
 
             modelBuilder.Entity("prs.Models.User", b =>
@@ -175,16 +177,8 @@ namespace prsserver.Migrations
 
                     b.Property<bool>("IsPreferred");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(30);
-
                     b.Property<string>("Phone")
                         .HasMaxLength(12);
-
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasMaxLength(30);
 
                     b.Property<string>("Zip")
                         .IsRequired()

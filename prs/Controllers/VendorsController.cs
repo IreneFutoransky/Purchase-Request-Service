@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using prs.Models;
+ 
 
 namespace prs_server.Controllers
 {
@@ -18,6 +19,44 @@ namespace prs_server.Controllers
         public VendorsController(PrsDbContext context)
         {
             _context = context;
+        }
+
+        // GET: api/Vendors/po/5
+        [HttpGet("/api/Vendors/Po/{id}")]
+        public async Task<ActionResult<Po>> GetPo(int id)
+        {
+
+            var po = new Po();
+            po.Vendor = await _context.Vendors.FindAsync(id);
+            Dictionary<int, RequestLine> lines = new Dictionary<int, RequestLine>();
+            var reqs = await _context.Requests
+                                    .Where(r => r.Status.Equals("APPROVED"))
+                                    .ToListAsync();
+            foreach (var r in reqs)
+            {
+                foreach (var l in r.RequestLines)
+                {
+                    if (l.Product.VendorId == id)
+                    {
+                        if (lines.Keys.Contains(l.ProductId))
+                        {
+                            lines[l.ProductId].Quantity += l.Quantity;
+                        }
+                        else
+                        {
+                            lines.Add(l.ProductId, l);
+                        }
+                    }
+                }
+            }
+            foreach (var key in lines.Keys)
+            {
+                po.PoLines.Add(lines[key]);
+            }
+
+            po.Total = po.PoLines.Sum(l => l.Quantity * l.Product.Price);
+
+            return Ok(po);
         }
 
         // GET: api/Vendors
